@@ -8,6 +8,8 @@
 
 #import "GlobalVC.h"
 
+#import "Common.h"
+
 #import "AguModel.h"
 #import "AguCell.h"
 
@@ -31,7 +33,7 @@ static NSString *aguIdentifier = @"agu";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH - 120) style:UITableViewStylePlain];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.estimatedRowHeight = 100.f;
@@ -70,14 +72,7 @@ static NSString *aguIdentifier = @"agu";
     NSInteger time = (NSInteger)interval;
     NSDictionary *parameter = @{@"page":@(_pageIndex),
                                 @"_eva_t":@(time)};
-    //    NSString *url = @"";
-    //    if (_currentIndex == 0) {
-    //        url = @"http://api.wallstreetcn.com/v2/livenews?cid=&type=&importance=&channelId=1";
-    //    } else if (_currentIndex == 1) {
-    //        url = @"http://api.wallstreetcn.com/v2/livenews?channelId=2";
-    //    } else {
-    //        url = @"";
-    //    }
+ 
     
     [manager GET:@"http://api.wallstreetcn.com/v2/livenews?cid=&type=&importance=&channelId=1" parameters:parameter progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         

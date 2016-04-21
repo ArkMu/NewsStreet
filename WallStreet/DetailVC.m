@@ -14,6 +14,8 @@
 
 #import "Masonry.h"
 
+#import "Common.h"
+
 @interface DetailVC () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -29,13 +31,9 @@ static NSString *webIdentifier = @"web";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.frame];
-//    [self.view addSubview:webView];
-//    
-//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:_url]];
-//    [webView loadRequest:request];
-    
     self.navigationController.navigationBar.translucent = NO;
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"browser_previous@2x"] style:UIBarButtonItemStylePlain target:self action:@selector(actionOnBarBtnTaped)];
     
     [self loadData];
     
@@ -57,35 +55,23 @@ static NSString *webIdentifier = @"web";
     [manager GET:str parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSError *error;
         id obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&error];
-        NSLog(@"%@", error);
-        
-//        NSLog(@"%@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         
         NSDictionary *resultDict = (NSDictionary *)obj;
         
-//        NSMutableDictionary *htmlDict = [NSMutableDictionary dictionary];
         NSString *title = resultDict[@"title"];
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:[resultDict[@"createdAt"] integerValue]];
         NSString *created = [NSString stringWithFormat:@"%@", date];
         
         NSString *summary = resultDict[@"summary"];
-        NSString *imageUrl = resultDict[@"imageUrl"];
         NSString *content = resultDict[@"content"];
         NSString *html = [NSString stringWithFormat:@"<html><head><style type=\"text/css\">img{width: %f;height: auto;text-align:center}</style></head><h2 style=\"font-size:20px;color:black\">%@</h2><p style=\"font-size:14px;color:gray\">%@ %@</p><body style=\"font-size:17px;color:gray\">%@</body></html>", 360.f,title, created, summary, content];
         
-                                                                             
-        
-        
-//        NSLog(@"%@", resultDict);
-        
         _detailModel = [DetailModel modelWithDictionary:resultDict];
         
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-//        [webView loadHTMLString:_detailModel.content baseURL:nil];
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH - 120)];
         [webView loadHTMLString:html baseURL:nil];
         
         [self.view addSubview:webView];
-//        [self loadTableView];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
@@ -122,6 +108,10 @@ static NSString *webIdentifier = @"web";
     return cell;
 }
 
+
+- (void)actionOnBarBtnTaped {
+    [self.navigationController popViewControllerAnimated:NO];
+}
 
 
 @end

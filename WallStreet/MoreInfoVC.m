@@ -21,7 +21,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 
-@property (nonatomic, strong) NSMutableArray *infoArr;
+//@property (nonatomic, strong) NSMutableArray *infoArr;
 
 @property (nonatomic, assign) NSInteger pageIndex;
 
@@ -42,7 +42,13 @@ static NSString *cellIdentifier = @"cell";
     
     [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([InfoCellOne class]) bundle:nil] forCellReuseIdentifier:cellIdentifier];
     
+    _infoArr = [NSMutableArray array];
+    
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        if (_infoArr.count) {
+//            return;
+//        }
+        
         _pageIndex = 1;
         [self loadData];
     }];
@@ -52,7 +58,7 @@ static NSString *cellIdentifier = @"cell";
         [self loadData];
     }];
     
-    [self loadData];
+    [_tableView.mj_header beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,7 +78,6 @@ static NSString *cellIdentifier = @"cell";
         NSDictionary *resultDict = (NSDictionary *)responseObject;
         NSArray *resultArr = resultDict[@"results"];
         
-        _infoArr = [NSMutableArray array];
         [resultArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             InfoModel *model = [InfoModel modelWithDictionary:(NSDictionary *)obj];
             [_infoArr addObject:model];
@@ -106,7 +111,7 @@ static NSString *cellIdentifier = @"cell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     InfoModel *model = _infoArr[indexPath.row];
     
-    DetailVC *web = [self.storyboard instantiateViewControllerWithIdentifier:@"WebVC"];
+    DetailVC *web = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailVC"];
     web.Id = model.Id;
     //    web.url = model.url;
     

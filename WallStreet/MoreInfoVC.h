@@ -14,4 +14,7 @@
 
 @property (nonatomic, strong) NSString *channel;
 
+@property (nonatomic, strong) NSMutableArray *infoArr;
+
+
 @end

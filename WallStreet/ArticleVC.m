@@ -27,7 +27,9 @@
 
 #import "ListVC.h"
 
-#import "MoreInfoVC.h"
+//#import "MoreInfoVC.h"
+
+#import "TopicVC.h"
 
 @interface ArticleVC () <UITableViewDataSource, UITableViewDelegate>
 
@@ -40,6 +42,8 @@
 @property (nonatomic, assign) NSInteger pageIndex;
 
 @property (nonatomic, strong) ListVC *list;
+
+@property (nonatomic, strong) UITapGestureRecognizer *tap;
 
 @end
 
@@ -91,22 +95,18 @@ static NSString *btnIdentifier = @"btn";
     }];
     
     [_tableView.mj_header beginRefreshing];
+    
+    //偏移手势
+    UIScreenEdgePanGestureRecognizer *screenPan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(edgeGestureAction:)];
+    screenPan.edges = UIRectEdgeRight;
+    [_tableView addGestureRecognizer:screenPan];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void)loadMoreData {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -156,6 +156,11 @@ static NSString *btnIdentifier = @"btn";
         
         ScrollView *scroll = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([ScrollView class]) owner:nil options:nil][0];
         scroll.infoArr = _infoArr;
+        scroll.gotoView = ^(NSInteger Id){
+            DetailVC *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailVC"];
+            detail.Id = Id;
+            [self.navigationController pushViewController:detail animated:NO];
+        };
         _tableView.tableHeaderView = scroll;
 
         [self loadMoreData];
@@ -233,6 +238,11 @@ static NSString *btnIdentifier = @"btn";
             make.bottom.mas_equalTo(-10);
         }];
         
+        scroll.showsHorizontalScrollIndicator = NO;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jump:)];
+        [scroll addGestureRecognizer:tap];
+        
         return cell;
     } else {
         InfoCellOne *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -255,6 +265,7 @@ static NSString *btnIdentifier = @"btn";
     [relation enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         RelationModel *model = (RelationModel *)obj;
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.userInteractionEnabled = NO;
         
         [btn sd_setBackgroundImageWithURL:[NSURL URLWithString:model.imgUrl] forState:UIControlStateNormal];
         
@@ -291,10 +302,17 @@ static NSString *btnIdentifier = @"btn";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     InfoModel *model = _mArr[indexPath.row];
     
-    DetailVC *web = [self.storyboard instantiateViewControllerWithIdentifier:@"WebVC"];
-    web.Id = model.Id;
-//    web.url = model.url;
+    if ([model.type isEqualToString:@"topic"]) {
+
+        TopicVC *topic = [self.storyboard instantiateViewControllerWithIdentifier:@"TopicVC"];
+        topic.index = model.Id;
+        
+        [self.navigationController pushViewController:topic animated:NO];
+        return;
+    }
     
+    DetailVC *web = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailVC"];
+    web.Id = model.Id;
     [self.navigationController pushViewController:web animated:NO];
 }
 
@@ -305,10 +323,10 @@ static NSString *btnIdentifier = @"btn";
         _list.view.transform = CGAffineTransformMakeTranslation(300, 0);
         _tableView.transform = CGAffineTransformMakeTranslation(300, 0);
         self.navigationController.navigationBar.transform = CGAffineTransformMakeTranslation(300, 0);
+        
+        _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backView)];
+        [_tableView addGestureRecognizer:_tap];
     }];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backView)];
-    [_tableView addGestureRecognizer:tap];
     
 }
 
@@ -317,7 +335,23 @@ static NSString *btnIdentifier = @"btn";
         _list.view.transform = CGAffineTransformIdentity;
         _tableView.transform = CGAffineTransformIdentity;
         self.navigationController.navigationBar.transform = CGAffineTransformIdentity;
+        [_tableView removeGestureRecognizer:_tap];
     }];
+}
+
+- (void)jump:(UITapGestureRecognizer *)tap {
+    UITableViewCell *cell = (UITableViewCell *)tap.view;
+    NSIndexPath *indexpath = [_tableView indexPathForCell:cell];
+    InfoModel *model = _mArr[indexpath.row];
+    
+    DetailVC *web = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailVC"];
+    web.Id = model.Id;
+    [self.navigationController pushViewController:web animated:NO];
+}
+
+
+- (void)edgeGestureAction:(UIScreenEdgePanGestureRecognizer *)screenPan {
+    NSLog(@"%@", screenPan);
 }
 
 @end

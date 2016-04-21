@@ -37,6 +37,7 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionOnTap)];
     [_centerImgView addGestureRecognizer:tap];
+    
 }
 
 - (void)setInfoArr:(NSArray *)infoArr {
@@ -56,8 +57,6 @@
     }
     
     _currentIndex = [self indexEnable:_currentIndex];
-    
-    scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.scrollView.frame), 0);
     
     [self setImgForView];
 }
@@ -83,6 +82,8 @@
     [_rightImgView sd_setImageWithURL:[NSURL URLWithString:rightModel.imgUrl] placeholderImage:nil];
     _titleLabel.text = rightModel.title;
     _rightImgView.userInteractionEnabled = YES;
+    
+    _scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.scrollView.frame), 0);
     
 }
 

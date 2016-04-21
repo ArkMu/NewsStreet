@@ -70,21 +70,38 @@
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
+    NSInteger index = [[viewController valueForKey:@"index"] integerValue];
+    _index = index;
+    
+    _segment.selectedSegmentIndex = _index;
+    
     _index--;
     if (_index < 0) {
         return nil;
     }
-    _segment.selectedSegmentIndex = _index;
+    
+    
+    UIViewController *vc = _VCArr[_index];
+    [vc setValue:@(_index) forKey:@"index"];
+    
     return _VCArr[_index];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
+    NSInteger index = [[viewController valueForKey:@"index"] integerValue];
+    _index = index;
+    
+    _segment.selectedSegmentIndex = _index;
+    
     _index++;
     if (_index == _VCArr.count) {
         return nil;
     }
     
-    _segment.selectedSegmentIndex = _index;
+    
+    UIViewController *vc = _VCArr[_index];
+    [vc setValue:@(_index) forKey:@"index"];
+    
     return _VCArr[_index];
 }
 
@@ -105,5 +122,7 @@
     
     [self.view addSubview:picker];
 }
+
+
 
 @end

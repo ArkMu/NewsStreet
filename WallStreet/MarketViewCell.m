@@ -35,11 +35,27 @@
     _titleLabel.text = [NSString stringWithFormat:@"(%@)%@",markModel.country, markModel.title];
     _timeLabel.text = [NSString stringWithFormat:@"%@", [markModel.localDateTime substringWithRange:NSMakeRange(11, 5)]];
     
-    _actualLabel.text = [NSString stringWithFormat:@"今值:%@", markModel.actual];
-    _forcastLabel.text = [NSString stringWithFormat:@"预期:%@", markModel.forecast];
-    _previousLabel.text = [NSString stringWithFormat:@"前值:%@", markModel.previous];
+    if ([markModel.actual isKindOfClass:[NSNull class]]) {
+        _actualLabel.text = @"今值:   ";
+    } else {
+        _actualLabel.text = [NSString stringWithFormat:@"今值:%@", markModel.actual];
+    }
     
-//    _imporTanceImgView.image = []
+    if ([markModel.forecast isKindOfClass:[NSNull class]]) {
+        _forcastLabel.text = @"预期:  ";
+    } else {
+       _forcastLabel.text = [NSString stringWithFormat:@"预期:%@", markModel.forecast];
+    }
+    
+    if ([markModel.previous isKindOfClass:[NSNull class]]) {
+        _previousLabel.text = @"前值:  ";
+    } else {
+      _previousLabel.text = [NSString stringWithFormat:@"前值:%@", markModel.previous];
+    }
+    
+    
+    
+    
 }
 
 - (void)setCountryName:(NSDictionary *)countryName {
