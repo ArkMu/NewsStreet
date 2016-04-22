@@ -40,14 +40,13 @@ static NSString *cellIdentifier = @"cell";
     _tableView.rowHeight = 100.f;
     [self.view addSubview:_tableView];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"browser_previous@2x"] style:UIBarButtonItemStylePlain target:self action:@selector(actionOnLeftBtn)];
+    
     [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([InfoCellOne class]) bundle:nil] forCellReuseIdentifier:cellIdentifier];
     
     _infoArr = [NSMutableArray array];
     
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//        if (_infoArr.count) {
-//            return;
-//        }
         
         _pageIndex = 1;
         [self loadData];
@@ -73,7 +72,6 @@ static NSString *cellIdentifier = @"cell";
     NSDictionary *parameter = @{@"channel":_channel,@"page":@(_pageIndex)};
     
     [manager GET:@"http://api.wallstreetcn.com/v2/mobile-articles?&device=android&accept=article&_eva_t=1461145954" parameters:parameter progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@", responseObject);
         
         NSDictionary *resultDict = (NSDictionary *)responseObject;
         NSArray *resultArr = resultDict[@"results"];
@@ -113,9 +111,12 @@ static NSString *cellIdentifier = @"cell";
     
     DetailVC *web = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailVC"];
     web.Id = model.Id;
-    //    web.url = model.url;
     
     [self.navigationController pushViewController:web animated:NO];
+}
+
+- (void)actionOnLeftBtn {
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 @end

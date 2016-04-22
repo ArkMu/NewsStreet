@@ -60,7 +60,7 @@
     
     _scrollView.delegate = self;
     
-//    UIView *rView = [[UIView alloc] initWithFrame:CGRectMake(0, 24, ScreenW, 40)];
+    
     for (int i = 0; i < _locationArr.count; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setTitle:_locationArr[i] forState:UIControlStateNormal];
@@ -70,15 +70,12 @@
         
         [btn addTarget:self action:@selector(actionOnBtnSelected:) forControlEvents:UIControlEventTouchUpInside];
         
-//        [self.view addSubview:btn];
+        
         [_btnArr addObject:btn];
         btn.frame = CGRectMake(125 * i, 0, 125, 40);
         
         [self.navigationController.navigationBar addSubview:btn];
-//        [self.navigationItem .titleView addSubview:btn];
         
-//        [rView addSubview:btn];
-//        self.navigationItem.titleView = rView;
     }
     
     [self setBtnColor:0];
@@ -114,14 +111,5 @@
     [self setBtnColor:index];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

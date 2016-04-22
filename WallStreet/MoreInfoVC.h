@@ -10,8 +10,6 @@
 
 @interface MoreInfoVC : UIViewController
 
-//@property (nonatomic, strong) NSString *url;
-
 @property (nonatomic, strong) NSString *channel;
 
 @property (nonatomic, strong) NSMutableArray *infoArr;

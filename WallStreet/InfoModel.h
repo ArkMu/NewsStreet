@@ -10,7 +10,7 @@
 
 @class UserModel;
 
-@interface InfoModel : NSObject
+@interface InfoModel : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, assign) NSInteger Id;

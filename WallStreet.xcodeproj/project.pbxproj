@@ -26,7 +26,6 @@
 		CC1079501CC764CF00152178 /* navi_item_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC1079441CC764CF00152178 /* navi_item_share@3x.png */; };
 		CC1079531CC7680A00152178 /* Candar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC1079521CC7680A00152178 /* Candar@2x.png */; };
 		CC1079561CC7681900152178 /* England.png in Resources */ = {isa = PBXBuildFile; fileRef = CC1079541CC7681900152178 /* England.png */; };
-		CC1079571CC7681900152178 /* Eurozone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC1079551CC7681900152178 /* Eurozone@2x.png */; };
 		CC10795A1CC7682400152178 /* France@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC1079581CC7682400152178 /* France@2x.png */; };
 		CC10795B1CC7682400152178 /* Germany@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC1079591CC7682400152178 /* Germany@2x.png */; };
 		CC10795F1CC7689600152178 /* India@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC10795C1CC7689600152178 /* India@2x.png */; };
@@ -50,6 +49,24 @@
 		CC1079851CC77FEE00152178 /* share_button_weibo_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC1079821CC77FEE00152178 /* share_button_weibo_normal@2x.png */; };
 		CC1079861CC77FEE00152178 /* share_button_weixincontact_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC1079831CC77FEE00152178 /* share_button_weixincontact_normal@2x.png */; };
 		CC10798D1CC7C10500152178 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC10798C1CC7C10500152178 /* libxml2.2.tbd */; };
+		CC12BB251CC9F6310008BBA4 /* JTCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC12BB051CC9F6310008BBA4 /* JTCalendarManager.m */; };
+		CC12BB261CC9F6310008BBA4 /* JTCalendarSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = CC12BB071CC9F6310008BBA4 /* JTCalendarSettings.m */; };
+		CC12BB271CC9F6310008BBA4 /* JTDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CC12BB091CC9F6310008BBA4 /* JTDateHelper.m */; };
+		CC12BB281CC9F6310008BBA4 /* JTCalendarDelegateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC12BB0C1CC9F6310008BBA4 /* JTCalendarDelegateManager.m */; };
+		CC12BB291CC9F6310008BBA4 /* JTCalendarScrollManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC12BB0E1CC9F6310008BBA4 /* JTCalendarScrollManager.m */; };
+		CC12BB2A1CC9F6310008BBA4 /* JTCalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC12BB181CC9F6310008BBA4 /* JTCalendarDayView.m */; };
+		CC12BB2B1CC9F6310008BBA4 /* JTCalendarMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC12BB1A1CC9F6310008BBA4 /* JTCalendarMenuView.m */; };
+		CC12BB2C1CC9F6310008BBA4 /* JTCalendarPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC12BB1C1CC9F6310008BBA4 /* JTCalendarPageView.m */; };
+		CC12BB2D1CC9F6310008BBA4 /* JTCalendarWeekDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC12BB1E1CC9F6310008BBA4 /* JTCalendarWeekDayView.m */; };
+		CC12BB2E1CC9F6310008BBA4 /* JTCalendarWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC12BB201CC9F6310008BBA4 /* JTCalendarWeekView.m */; };
+		CC12BB2F1CC9F6310008BBA4 /* JTHorizontalCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC12BB221CC9F6310008BBA4 /* JTHorizontalCalendarView.m */; };
+		CC12BB301CC9F6310008BBA4 /* JTVerticalCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC12BB241CC9F6310008BBA4 /* JTVerticalCalendarView.m */; };
+		CC12BB321CCA0D9C0008BBA4 /* Austria.png in Resources */ = {isa = PBXBuildFile; fileRef = CC12BB311CCA0D9C0008BBA4 /* Austria.png */; };
+		CC12BB341CCA0E4C0008BBA4 /* RepublicOfSingapore.png in Resources */ = {isa = PBXBuildFile; fileRef = CC12BB331CCA0E4C0008BBA4 /* RepublicOfSingapore.png */; };
+		CC12BB361CCA11280008BBA4 /* Italy.png in Resources */ = {isa = PBXBuildFile; fileRef = CC12BB351CCA11280008BBA4 /* Italy.png */; };
+		CC12BB381CCA12E00008BBA4 /* Sweden.png in Resources */ = {isa = PBXBuildFile; fileRef = CC12BB371CCA12E00008BBA4 /* Sweden.png */; };
+		CC12BB3A1CCA134F0008BBA4 /* Belgium.png in Resources */ = {isa = PBXBuildFile; fileRef = CC12BB391CCA134F0008BBA4 /* Belgium.png */; };
+		CC12BB3C1CCA13A30008BBA4 /* European.png in Resources */ = {isa = PBXBuildFile; fileRef = CC12BB3B1CCA13A30008BBA4 /* European.png */; };
 		CC1B6CED1CC7CA6400E75CFD /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1B6CEC1CC7CA6400E75CFD /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CC1D26101CC4F17700A577C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1D260F1CC4F17700A577C6 /* main.m */; };
 		CC1D26131CC4F17700A577C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC1D26121CC4F17700A577C6 /* AppDelegate.m */; };
@@ -156,6 +173,7 @@
 		CCF60E4F1CC8EE3200489CDD /* InfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF60E4D1CC8EE3200489CDD /* InfoCell.m */; };
 		CCF60E501CC8EE3200489CDD /* InfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCF60E4E1CC8EE3200489CDD /* InfoCell.xib */; };
 		CCF60E521CC90A8100489CDD /* browser_previous@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CCF60E511CC90A8100489CDD /* browser_previous@2x.png */; };
+		CCF641E21CCA4C1E00C1AE18 /* ArtistList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCF641E11CCA4C1E00C1AE18 /* ArtistList.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,7 +198,6 @@
 		CC1079441CC764CF00152178 /* navi_item_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navi_item_share@3x.png"; sourceTree = "<group>"; };
 		CC1079521CC7680A00152178 /* Candar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Candar@2x.png"; sourceTree = "<group>"; };
 		CC1079541CC7681900152178 /* England.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = England.png; sourceTree = "<group>"; };
-		CC1079551CC7681900152178 /* Eurozone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Eurozone@2x.png"; sourceTree = "<group>"; };
 		CC1079581CC7682400152178 /* France@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "France@2x.png"; sourceTree = "<group>"; };
 		CC1079591CC7682400152178 /* Germany@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Germany@2x.png"; sourceTree = "<group>"; };
 		CC10795C1CC7689600152178 /* India@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "India@2x.png"; sourceTree = "<group>"; };
@@ -206,6 +223,44 @@
 		CC1079821CC77FEE00152178 /* share_button_weibo_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_button_weibo_normal@2x.png"; sourceTree = "<group>"; };
 		CC1079831CC77FEE00152178 /* share_button_weixincontact_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_button_weixincontact_normal@2x.png"; sourceTree = "<group>"; };
 		CC10798C1CC7C10500152178 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		CC12BB021CC9F6310008BBA4 /* JTCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendar.h; sourceTree = "<group>"; };
+		CC12BB031CC9F6310008BBA4 /* JTCalendarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarDelegate.h; sourceTree = "<group>"; };
+		CC12BB041CC9F6310008BBA4 /* JTCalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarManager.h; sourceTree = "<group>"; };
+		CC12BB051CC9F6310008BBA4 /* JTCalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarManager.m; sourceTree = "<group>"; };
+		CC12BB061CC9F6310008BBA4 /* JTCalendarSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarSettings.h; sourceTree = "<group>"; };
+		CC12BB071CC9F6310008BBA4 /* JTCalendarSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarSettings.m; sourceTree = "<group>"; };
+		CC12BB081CC9F6310008BBA4 /* JTDateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTDateHelper.h; sourceTree = "<group>"; };
+		CC12BB091CC9F6310008BBA4 /* JTDateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTDateHelper.m; sourceTree = "<group>"; };
+		CC12BB0B1CC9F6310008BBA4 /* JTCalendarDelegateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarDelegateManager.h; sourceTree = "<group>"; };
+		CC12BB0C1CC9F6310008BBA4 /* JTCalendarDelegateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarDelegateManager.m; sourceTree = "<group>"; };
+		CC12BB0D1CC9F6310008BBA4 /* JTCalendarScrollManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarScrollManager.h; sourceTree = "<group>"; };
+		CC12BB0E1CC9F6310008BBA4 /* JTCalendarScrollManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarScrollManager.m; sourceTree = "<group>"; };
+		CC12BB101CC9F6310008BBA4 /* JTCalendarDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarDay.h; sourceTree = "<group>"; };
+		CC12BB111CC9F6310008BBA4 /* JTCalendarPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarPage.h; sourceTree = "<group>"; };
+		CC12BB121CC9F6310008BBA4 /* JTCalendarWeek.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarWeek.h; sourceTree = "<group>"; };
+		CC12BB131CC9F6310008BBA4 /* JTCalendarWeekDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarWeekDay.h; sourceTree = "<group>"; };
+		CC12BB141CC9F6310008BBA4 /* JTContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTContent.h; sourceTree = "<group>"; };
+		CC12BB151CC9F6310008BBA4 /* JTMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTMenu.h; sourceTree = "<group>"; };
+		CC12BB171CC9F6310008BBA4 /* JTCalendarDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarDayView.h; sourceTree = "<group>"; };
+		CC12BB181CC9F6310008BBA4 /* JTCalendarDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarDayView.m; sourceTree = "<group>"; };
+		CC12BB191CC9F6310008BBA4 /* JTCalendarMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarMenuView.h; sourceTree = "<group>"; };
+		CC12BB1A1CC9F6310008BBA4 /* JTCalendarMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarMenuView.m; sourceTree = "<group>"; };
+		CC12BB1B1CC9F6310008BBA4 /* JTCalendarPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarPageView.h; sourceTree = "<group>"; };
+		CC12BB1C1CC9F6310008BBA4 /* JTCalendarPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarPageView.m; sourceTree = "<group>"; };
+		CC12BB1D1CC9F6310008BBA4 /* JTCalendarWeekDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarWeekDayView.h; sourceTree = "<group>"; };
+		CC12BB1E1CC9F6310008BBA4 /* JTCalendarWeekDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarWeekDayView.m; sourceTree = "<group>"; };
+		CC12BB1F1CC9F6310008BBA4 /* JTCalendarWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTCalendarWeekView.h; sourceTree = "<group>"; };
+		CC12BB201CC9F6310008BBA4 /* JTCalendarWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTCalendarWeekView.m; sourceTree = "<group>"; };
+		CC12BB211CC9F6310008BBA4 /* JTHorizontalCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTHorizontalCalendarView.h; sourceTree = "<group>"; };
+		CC12BB221CC9F6310008BBA4 /* JTHorizontalCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTHorizontalCalendarView.m; sourceTree = "<group>"; };
+		CC12BB231CC9F6310008BBA4 /* JTVerticalCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTVerticalCalendarView.h; sourceTree = "<group>"; };
+		CC12BB241CC9F6310008BBA4 /* JTVerticalCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTVerticalCalendarView.m; sourceTree = "<group>"; };
+		CC12BB311CCA0D9C0008BBA4 /* Austria.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Austria.png; sourceTree = "<group>"; };
+		CC12BB331CCA0E4C0008BBA4 /* RepublicOfSingapore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RepublicOfSingapore.png; sourceTree = "<group>"; };
+		CC12BB351CCA11280008BBA4 /* Italy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Italy.png; sourceTree = "<group>"; };
+		CC12BB371CCA12E00008BBA4 /* Sweden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sweden.png; sourceTree = "<group>"; };
+		CC12BB391CCA134F0008BBA4 /* Belgium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Belgium.png; sourceTree = "<group>"; };
+		CC12BB3B1CCA13A30008BBA4 /* European.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = European.png; sourceTree = "<group>"; };
 		CC1B6CEB1CC7CA6400E75CFD /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		CC1B6CEC1CC7CA6400E75CFD /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		CC1D260B1CC4F17700A577C6 /* WallStreet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallStreet.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -413,6 +468,7 @@
 		CCF60E4D1CC8EE3200489CDD /* InfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoCell.m; sourceTree = "<group>"; };
 		CCF60E4E1CC8EE3200489CDD /* InfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoCell.xib; sourceTree = "<group>"; };
 		CCF60E511CC90A8100489CDD /* browser_previous@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "browser_previous@2x.png"; sourceTree = "<group>"; };
+		CCF641E11CCA4C1E00C1AE18 /* ArtistList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ArtistList.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -453,6 +509,8 @@
 			isa = PBXGroup;
 			children = (
 				CCF60E511CC90A8100489CDD /* browser_previous@2x.png */,
+				CC12BB371CCA12E00008BBA4 /* Sweden.png */,
+				CC12BB311CCA0D9C0008BBA4 /* Austria.png */,
 				CC1079741CC76D1D00152178 /* Hongkong@2x.png */,
 				CC10796E1CC768FB00152178 /* Zealand@2x.png */,
 				CC10796C1CC768F100152178 /* Usa@2x.png */,
@@ -467,11 +525,14 @@
 				CC1079581CC7682400152178 /* France@2x.png */,
 				CC1079591CC7682400152178 /* Germany@2x.png */,
 				CC1079541CC7681900152178 /* England.png */,
-				CC1079551CC7681900152178 /* Eurozone@2x.png */,
 				CC1079701CC769AA00152178 /* Australian@2x.png */,
 				CC1079721CC769C100152178 /* China@2x.png */,
 				CC1079521CC7680A00152178 /* Candar@2x.png */,
 				CC1079761CC76E2600152178 /* Norway@2x.png */,
+				CC12BB331CCA0E4C0008BBA4 /* RepublicOfSingapore.png */,
+				CC12BB351CCA11280008BBA4 /* Italy.png */,
+				CC12BB391CCA134F0008BBA4 /* Belgium.png */,
+				CC12BB3B1CCA13A30008BBA4 /* European.png */,
 			);
 			name = Country;
 			sourceTree = "<group>";
@@ -484,6 +545,69 @@
 				CC1079831CC77FEE00152178 /* share_button_weixincontact_normal@2x.png */,
 			);
 			name = List;
+			sourceTree = "<group>";
+		};
+		CC12BB011CC9F6310008BBA4 /* JTCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				CC12BB021CC9F6310008BBA4 /* JTCalendar.h */,
+				CC12BB031CC9F6310008BBA4 /* JTCalendarDelegate.h */,
+				CC12BB041CC9F6310008BBA4 /* JTCalendarManager.h */,
+				CC12BB051CC9F6310008BBA4 /* JTCalendarManager.m */,
+				CC12BB061CC9F6310008BBA4 /* JTCalendarSettings.h */,
+				CC12BB071CC9F6310008BBA4 /* JTCalendarSettings.m */,
+				CC12BB081CC9F6310008BBA4 /* JTDateHelper.h */,
+				CC12BB091CC9F6310008BBA4 /* JTDateHelper.m */,
+				CC12BB0A1CC9F6310008BBA4 /* Managers */,
+				CC12BB0F1CC9F6310008BBA4 /* Protocols */,
+				CC12BB161CC9F6310008BBA4 /* Views */,
+			);
+			path = JTCalendar;
+			sourceTree = "<group>";
+		};
+		CC12BB0A1CC9F6310008BBA4 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				CC12BB0B1CC9F6310008BBA4 /* JTCalendarDelegateManager.h */,
+				CC12BB0C1CC9F6310008BBA4 /* JTCalendarDelegateManager.m */,
+				CC12BB0D1CC9F6310008BBA4 /* JTCalendarScrollManager.h */,
+				CC12BB0E1CC9F6310008BBA4 /* JTCalendarScrollManager.m */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		CC12BB0F1CC9F6310008BBA4 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CC12BB101CC9F6310008BBA4 /* JTCalendarDay.h */,
+				CC12BB111CC9F6310008BBA4 /* JTCalendarPage.h */,
+				CC12BB121CC9F6310008BBA4 /* JTCalendarWeek.h */,
+				CC12BB131CC9F6310008BBA4 /* JTCalendarWeekDay.h */,
+				CC12BB141CC9F6310008BBA4 /* JTContent.h */,
+				CC12BB151CC9F6310008BBA4 /* JTMenu.h */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CC12BB161CC9F6310008BBA4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CC12BB171CC9F6310008BBA4 /* JTCalendarDayView.h */,
+				CC12BB181CC9F6310008BBA4 /* JTCalendarDayView.m */,
+				CC12BB191CC9F6310008BBA4 /* JTCalendarMenuView.h */,
+				CC12BB1A1CC9F6310008BBA4 /* JTCalendarMenuView.m */,
+				CC12BB1B1CC9F6310008BBA4 /* JTCalendarPageView.h */,
+				CC12BB1C1CC9F6310008BBA4 /* JTCalendarPageView.m */,
+				CC12BB1D1CC9F6310008BBA4 /* JTCalendarWeekDayView.h */,
+				CC12BB1E1CC9F6310008BBA4 /* JTCalendarWeekDayView.m */,
+				CC12BB1F1CC9F6310008BBA4 /* JTCalendarWeekView.h */,
+				CC12BB201CC9F6310008BBA4 /* JTCalendarWeekView.m */,
+				CC12BB211CC9F6310008BBA4 /* JTHorizontalCalendarView.h */,
+				CC12BB221CC9F6310008BBA4 /* JTHorizontalCalendarView.m */,
+				CC12BB231CC9F6310008BBA4 /* JTVerticalCalendarView.h */,
+				CC12BB241CC9F6310008BBA4 /* JTVerticalCalendarView.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CC1D26021CC4F17700A577C6 = {
@@ -522,6 +646,7 @@
 		CC1D260E1CC4F17700A577C6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CCF641E11CCA4C1E00C1AE18 /* ArtistList.plist */,
 				CC1D261A1CC4F17700A577C6 /* Assets.xcassets */,
 				CC1D261C1CC4F17700A577C6 /* LaunchScreen.storyboard */,
 				CC1D261F1CC4F17700A577C6 /* Info.plist */,
@@ -607,6 +732,7 @@
 				CC1D26481CC4F27000A577C6 /* Masonry */,
 				CC1D26631CC4F27000A577C6 /* MJRefresh */,
 				CC1D26901CC4F27000A577C6 /* SDWebImage */,
+				CC12BB011CC9F6310008BBA4 /* JTCalendar */,
 				CC1D26FA1CC5093200A577C6 /* NSString+Time.h */,
 				CC1D26FB1CC5093200A577C6 /* NSString+Time.m */,
 				CCF60E351CC895FD00489CDD /* Common.h */,
@@ -862,10 +988,10 @@
 				CC50E8711CC6298300287547 /* LiveVC.m */,
 				CC50E8621CC60AD900287547 /* AguVC.h */,
 				CC50E8631CC60AD900287547 /* AguVC.m */,
-				CC50E8731CC62C0900287547 /* GlobalVC.h */,
-				CC50E8741CC62C0900287547 /* GlobalVC.m */,
 				CC50E8761CC62CD500287547 /* CalendarVC.h */,
 				CC50E8771CC62CD500287547 /* CalendarVC.m */,
+				CC50E8731CC62C0900287547 /* GlobalVC.h */,
+				CC50E8741CC62C0900287547 /* GlobalVC.m */,
 			);
 			name = Live;
 			sourceTree = "<group>";
@@ -972,16 +1098,19 @@
 				CC1D26F91CC507A000A577C6 /* InfoCellOne.xib in Resources */,
 				CC1D27011CC50C1100A577C6 /* ScrollView.xib in Resources */,
 				CC1079371CC753DA00152178 /* countryname.plist in Resources */,
+				CC12BB381CCA12E00008BBA4 /* Sweden.png in Resources */,
 				CC1079601CC7689600152178 /* Italy@2x.png in Resources */,
 				CC10795A1CC7682400152178 /* France@2x.png in Resources */,
 				CC1079331CC71CDF00152178 /* MarketViewCell.xib in Resources */,
 				CC1D26BE1CC4F27000A577C6 /* Info.plist in Resources */,
 				CC1079451CC764CF00152178 /* navi_item_add_friends@2x.png in Resources */,
 				CC1079531CC7680A00152178 /* Candar@2x.png in Resources */,
+				CC12BB3C1CCA13A30008BBA4 /* European.png in Resources */,
 				CC1079691CC768DF00152178 /* Swit@2x.png in Resources */,
 				CC10794F1CC764CF00152178 /* navi_item_share@2x.png in Resources */,
 				CC1D261E1CC4F17700A577C6 /* LaunchScreen.storyboard in Resources */,
 				CC1D26D81CC4F27000A577C6 /* MJRefresh.bundle in Resources */,
+				CC12BB341CCA0E4C0008BBA4 /* RepublicOfSingapore.png in Resources */,
 				CC1079631CC768AA00152178 /* Korea@2x.png in Resources */,
 				CC1079461CC764CF00152178 /* navi_item_add_friends@3x.png in Resources */,
 				CCE5DE9F1CC5B70D001F322B /* BtnViewCell.xib in Resources */,
@@ -989,6 +1118,7 @@
 				CC1079841CC77FEE00152178 /* share_button_qqfriends_normal@2x.png in Resources */,
 				CC10795F1CC7689600152178 /* India@2x.png in Resources */,
 				CC10794D1CC764CF00152178 /* navi_item_setting@2x.png in Resources */,
+				CC12BB361CCA11280008BBA4 /* Italy.png in Resources */,
 				CC1D261B1CC4F17700A577C6 /* Assets.xcassets in Resources */,
 				CC1079481CC764CF00152178 /* navi_item_catalogs@3x.png in Resources */,
 				CC1D26BF1CC4F27000A577C6 /* Info.plist in Resources */,
@@ -999,7 +1129,6 @@
 				CC50E86E1CC60F6400287547 /* AguCell.xib in Resources */,
 				CC1079611CC7689600152178 /* Japan@2x.png in Resources */,
 				CC10797F1CC77F8500152178 /* ListHeaderView.xib in Resources */,
-				CC1079571CC7681900152178 /* Eurozone@2x.png in Resources */,
 				CC10795B1CC7682400152178 /* Germany@2x.png in Resources */,
 				CC1079771CC76E2600152178 /* Norway@2x.png in Resources */,
 				CC1079851CC77FEE00152178 /* share_button_weibo_normal@2x.png in Resources */,
@@ -1007,6 +1136,8 @@
 				CC1079711CC769AA00152178 /* Australian@2x.png in Resources */,
 				CC1079751CC76D1D00152178 /* Hongkong@2x.png in Resources */,
 				CCE5DEA11CC5B7C2001F322B /* icon@2x.png in Resources */,
+				CCF641E21CCA4C1E00C1AE18 /* ArtistList.plist in Resources */,
+				CC12BB321CCA0D9C0008BBA4 /* Austria.png in Resources */,
 				CC10794A1CC764CF00152178 /* navi_item_messages@3x.png in Resources */,
 				CC1079561CC7681900152178 /* England.png in Resources */,
 				CC1079861CC77FEE00152178 /* share_button_weixincontact_normal@2x.png in Resources */,
@@ -1022,6 +1153,7 @@
 				CCF60E521CC90A8100489CDD /* browser_previous@2x.png in Resources */,
 				CC1079671CC768D800152178 /* Spain@2x.png in Resources */,
 				CC10794C1CC764CF00152178 /* navi_item_search@3x.png in Resources */,
+				CC12BB3A1CCA134F0008BBA4 /* Belgium.png in Resources */,
 				CC1079491CC764CF00152178 /* navi_item_messages@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1035,6 +1167,7 @@
 			files = (
 				CC1D26C11CC4F27000A577C6 /* MASConstraint.m in Sources */,
 				CC1D26D71CC4F27000A577C6 /* MJRefreshStateHeader.m in Sources */,
+				CC12BB2E1CC9F6310008BBA4 /* JTCalendarWeekView.m in Sources */,
 				CCF60E421CC8A60200489CDD /* MessageDetailVC.m in Sources */,
 				CC1D26B81CC4F27000A577C6 /* AFURLSessionManager.m in Sources */,
 				CCF60E481CC8DD3200489CDD /* PostModel.m in Sources */,
@@ -1042,9 +1175,11 @@
 				CC1D26C91CC4F27000A577C6 /* ViewController+MASAdditions.m in Sources */,
 				CC1D26DA1CC4F27000A577C6 /* UIScrollView+MJExtension.m in Sources */,
 				CCF60E4B1CC8DE5900489CDD /* ResultModel.m in Sources */,
+				CC12BB2D1CC9F6310008BBA4 /* JTCalendarWeekDayView.m in Sources */,
 				CCF60E391CC89CBC00489CDD /* GunDongCell.m in Sources */,
 				CC1D26BB1CC4F27000A577C6 /* FMDatabasePool.m in Sources */,
 				CCF60E251CC887D100489CDD /* MessModel.m in Sources */,
+				CC12BB2A1CC9F6310008BBA4 /* JTCalendarDayView.m in Sources */,
 				CC1D26D11CC4F27000A577C6 /* MJRefreshAutoStateFooter.m in Sources */,
 				CC1D26BD1CC4F27000A577C6 /* FMResultSet.m in Sources */,
 				CC50E86D1CC60F6400287547 /* AguCell.m in Sources */,
@@ -1062,8 +1197,11 @@
 				CCF60E451CC8D66E00489CDD /* TopicVC.m in Sources */,
 				CC1D26C01CC4F27000A577C6 /* MASCompositeConstraint.m in Sources */,
 				CC1D262C1CC4F22500A577C6 /* ArticleVC.m in Sources */,
+				CC12BB251CC9F6310008BBA4 /* JTCalendarManager.m in Sources */,
 				CC1D26E41CC4F27000A577C6 /* SDWebImageManager.m in Sources */,
+				CC12BB2F1CC9F6310008BBA4 /* JTHorizontalCalendarView.m in Sources */,
 				CC1D26C21CC4F27000A577C6 /* MASConstraintMaker.m in Sources */,
+				CC12BB301CC9F6310008BBA4 /* JTVerticalCalendarView.m in Sources */,
 				CC10797A1CC76F8000152178 /* ListVC.m in Sources */,
 				CC1D26DD1CC4F27000A577C6 /* MKAnnotationView+WebCache.m in Sources */,
 				CC1D26C81CC4F27000A577C6 /* View+MASAdditions.m in Sources */,
@@ -1085,6 +1223,7 @@
 				CC1D26EA1CC4F27000A577C6 /* UIImageView+HighlightedWebCache.m in Sources */,
 				CC1D26C41CC4F27000A577C6 /* MASViewAttribute.m in Sources */,
 				CC1D26D21CC4F27000A577C6 /* MJRefreshBackGifFooter.m in Sources */,
+				CC12BB281CC9F6310008BBA4 /* JTCalendarDelegateManager.m in Sources */,
 				CC1D26EB1CC4F27000A577C6 /* UIImageView+WebCache.m in Sources */,
 				CCF60E311CC895A200489CDD /* GunDongVC.m in Sources */,
 				CC1D26D61CC4F27000A577C6 /* MJRefreshNormalHeader.m in Sources */,
@@ -1101,7 +1240,9 @@
 				CC1D26E81CC4F27000A577C6 /* UIImage+MultiFormat.m in Sources */,
 				CC1D26E71CC4F27000A577C6 /* UIImage+GIF.m in Sources */,
 				CC1D26B41CC4F27000A577C6 /* AFNetworkReachabilityManager.m in Sources */,
+				CC12BB271CC9F6310008BBA4 /* JTDateHelper.m in Sources */,
 				CC1D26D91CC4F27000A577C6 /* MJRefreshConst.m in Sources */,
+				CC12BB261CC9F6310008BBA4 /* JTCalendarSettings.m in Sources */,
 				CC1D26D51CC4F27000A577C6 /* MJRefreshGifHeader.m in Sources */,
 				CC1D26D31CC4F27000A577C6 /* MJRefreshBackNormalFooter.m in Sources */,
 				CC1D26FC1CC5093200A577C6 /* NSString+Time.m in Sources */,
@@ -1119,11 +1260,14 @@
 				CC1D26C51CC4F27000A577C6 /* MASViewConstraint.m in Sources */,
 				CC1D26B61CC4F27000A577C6 /* AFURLRequestSerialization.m in Sources */,
 				CC1D26CC1CC4F27000A577C6 /* MJRefreshComponent.m in Sources */,
+				CC12BB291CC9F6310008BBA4 /* JTCalendarScrollManager.m in Sources */,
 				CC1D26B71CC4F27000A577C6 /* AFURLResponseSerialization.m in Sources */,
 				CC10797D1CC77F6E00152178 /* ListHeaderView.m in Sources */,
 				CCE5DEB01CC5E304001F322B /* ConnectionModel.m in Sources */,
+				CC12BB2B1CC9F6310008BBA4 /* JTCalendarMenuView.m in Sources */,
 				CC1D26C31CC4F27000A577C6 /* MASLayoutConstraint.m in Sources */,
 				CC50E8781CC62CD500287547 /* CalendarVC.m in Sources */,
+				CC12BB2C1CC9F6310008BBA4 /* JTCalendarPageView.m in Sources */,
 				CC1D26EC1CC4F27000A577C6 /* UIView+WebCacheOperation.m in Sources */,
 				CC1D26B31CC4F27000A577C6 /* AFHTTPSessionManager.m in Sources */,
 			);

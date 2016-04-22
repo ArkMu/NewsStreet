@@ -73,7 +73,7 @@ static NSString *gundongIdentifier = @"gundong";
     NSString *str = [NSString stringWithFormat:@"http://news.10jqka.com.cn/gundong_mlist/1_0_1_%ld/", _pageIndex];
     
     [manager GET:str parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        //        NSLog(@"%@", responseObject);
+        
         
         NSError *error;
         GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:responseObject options:-1 error:&error];

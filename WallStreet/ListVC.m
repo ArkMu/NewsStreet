@@ -29,13 +29,14 @@ static NSString *headerIdentifier = @"header";
     [super viewDidLoad];
     _infoDic = @{@"专题":@"specials", @"最热":@"most-read", @"推荐":@"editors-choice", @"美国":@"us", @"中国":@"china", @"欧洲":@"europe", @"经济":@"economy", @"市场":@"markets", @"央行":@"central-banks", @"研究帝":@"research", @"盘前报告":@"MarketSummary"};
     
+
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(75, 24, 300, self.view.frame.size.height) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(75, 0, 300, self.view.frame.size.height) style:UITableViewStylePlain];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [self.view addSubview:_tableView];
  
-    [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ListHeaderView class]) bundle:nil] forHeaderFooterViewReuseIdentifier:headerIdentifier];
+//    [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ListHeaderView class]) bundle:nil] forHeaderFooterViewReuseIdentifier:headerIdentifier];
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
 }
 
@@ -69,22 +70,22 @@ static NSString *headerIdentifier = @"header";
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 120.f;
-    }
-    
-    return 0.01f;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    if (section == 0) {
+//        return 120.f;
+//    }
+//    
+//    return 0.01f;
+//}
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        ListHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headerIdentifier];
-        return headerView;
-    }
-    
-    return nil;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    if (section == 0) {
+//        ListHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headerIdentifier];
+//        return headerView;
+//    }
+//    
+//    return nil;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MoreInfoVC *info = [self.storyboard instantiateViewControllerWithIdentifier:@"MoreInfoVC"];

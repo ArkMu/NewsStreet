@@ -10,7 +10,6 @@
 
 #import "AguModel.h"
 
-#import "NSString+Time.h"
 
 @interface AguCell ()
 
@@ -24,13 +23,18 @@
 
 - (void)setAguModel:(AguModel *)aguModel {
     _aguModel = aguModel;
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[aguModel.updatedAt integerValue]];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *dateString = [formatter stringFromDate:date];
     
-    _timeLabel.text = [NSString dateString:[aguModel.updatedAt integerValue]];
+    _timeLabel.text = [dateString substringWithRange:NSMakeRange(11, 5)];
     _titleLabel.text = aguModel.title;
 }
 
 - (void)awakeFromNib {
-    // Initialization code
+    
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

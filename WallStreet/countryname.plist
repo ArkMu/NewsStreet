@@ -26,13 +26,23 @@
 	<string>Spain@2x</string>
 	<key>印度</key>
 	<string>India@2x</string>
-	<key>欧盟</key>
-	<string>Eurozone@2x</string>
 	<key>香港</key>
 	<string>Hongkong@2x</string>
 	<key>韩国</key>
 	<string>Korea@2x</string>
 	<key>挪威</key>
 	<string>Norway@2x</string>
+	<key>奥地利</key>
+	<string>Austria</string>
+	<key>新加坡</key>
+	<string>RepublicOfSingapore</string>
+	<key>意大利</key>
+	<string>Italy</string>
+	<key>瑞典</key>
+	<string>Sweden</string>
+	<key>比利时</key>
+	<string>Belgium</string>
+	<key>欧元区</key>
+	<string>European</string>
 </dict>
 </plist>

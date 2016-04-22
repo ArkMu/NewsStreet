@@ -42,7 +42,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIWebView *webview = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, ScreenW, ScreenH)];
+    UIWebView *webview = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, ScreenW, ScreenH - 64)];
     
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:_url]];
     [webview loadRequest:request];

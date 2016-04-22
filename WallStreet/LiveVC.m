@@ -36,15 +36,15 @@
     self.navigationItem.titleView = _segment;
     [_segment addTarget:self action:@selector(segmentControlValuedChanged:) forControlEvents:UIControlEventValueChanged];
     
-    NSDate *date = [NSDate date];
-    NSString *str = [NSString stringWithFormat:@"%@", date];
-    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightBtn.frame = CGRectMake(0, 0, 60, 40);
-    [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    rightBtn.titleLabel.font = [UIFont systemFontOfSize:13.f];
-    [rightBtn addTarget:self action:@selector(actionOnBtnTaped) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn setTitle:[str substringWithRange:NSMakeRange(0, 7)] forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+//    NSDate *date = [NSDate date];
+//    NSString *str = [NSString stringWithFormat:@"%@", date];
+//    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    rightBtn.frame = CGRectMake(0, 0, 60, 40);
+//    [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    rightBtn.titleLabel.font = [UIFont systemFontOfSize:13.f];
+//    [rightBtn addTarget:self action:@selector(actionOnBtnTaped) forControlEvents:UIControlEventTouchUpInside];
+//    [rightBtn setTitle:[str substringWithRange:NSMakeRange(0, 7)] forState:UIControlStateNormal];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     
     _pageViewControl = [self.storyboard instantiateViewControllerWithIdentifier:@"pageVC"];
     _pageViewControl.dataSource = self;
@@ -115,12 +115,6 @@
     _index = vcIndex;
     
     [_pageViewControl setViewControllers:@[_VCArr[vcIndex]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-}
-
-- (void)actionOnBtnTaped {
-    UIPickerView *picker = [[UIPickerView alloc] initWithFrame:self.view.frame];
-    
-    [self.view addSubview:picker];
 }
 
 

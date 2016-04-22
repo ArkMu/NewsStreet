@@ -73,7 +73,7 @@ static NSString *CellIdentifier = @"cell";
     NSString *urlStr = [NSString stringWithFormat:@"http://api.wallstreetcn.com/v2/posts/special/%ld?_eva_t=1461239594&page=%ld&limit=10", _index, _pageIndex];
     
     [manager GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@", responseObject);
+        
         NSDictionary *resultDict = (NSDictionary *)responseObject;
         NSDictionary *dict = resultDict[@"results"];
         _resultModel = [ResultModel modelWithDictionary:dict];

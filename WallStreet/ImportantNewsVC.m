@@ -65,8 +65,6 @@ static NSString *itemIdentifier = @"item";
     // Dispose of any resources that can be recreated.
 }
 
-//http://m.0033.com/list/headline/v2/1.xml
-//http://m.0033.com/list/headline/v2/2.xml
 
 -(void)loadData {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -75,11 +73,11 @@ static NSString *itemIdentifier = @"item";
     NSString *str = [NSString stringWithFormat:@"http://m.0033.com/list/headline/v2/%ld.xml", _pageIndex];
     
     [manager GET:str parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"%@", responseObject);
+        
         
         NSError *error;
         GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:responseObject options:-1 error:&error];
-        NSLog(@"%@", error);
+       
         
         GDataXMLElement *rootElement = [doc rootElement];
         

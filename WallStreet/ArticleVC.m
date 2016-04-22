@@ -45,6 +45,8 @@
 
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 
+@property (nonatomic, assign) BOOL gestureTag;
+
 @end
 
 @implementation ArticleVC
@@ -59,14 +61,16 @@ static NSString *btnIdentifier = @"btn";
     _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-//    _tableView.rowHeight = 100.f;
+    
     [self.view addSubview:_tableView];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navi_item_catalogs@2x"] style:UIBarButtonItemStylePlain target:self action:@selector(actionOnLeftBarBtnTaped)];
     
-    _list = [self.storyboard instantiateViewControllerWithIdentifier:@"ListVC"];
-    [self addChildViewController:_list];
     
+    UINavigationController *nav = [self.storyboard instantiateViewControllerWithIdentifier:@"NavVC"];
+    [self addChildViewController:nav];
+    
+    _list = nav.viewControllers.firstObject;
     [self.view addSubview:_list.view];
     
     [self.view.window bringSubviewToFront:_list.view];
@@ -97,9 +101,15 @@ static NSString *btnIdentifier = @"btn";
     [_tableView.mj_header beginRefreshing];
     
     //偏移手势
-    UIScreenEdgePanGestureRecognizer *screenPan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(edgeGestureAction:)];
-    screenPan.edges = UIRectEdgeRight;
-    [_tableView addGestureRecognizer:screenPan];
+    // 屏幕左部偏移
+    UIScreenEdgePanGestureRecognizer *screenPanLeft = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(leftEdgeGestureAction:)];
+    screenPanLeft.edges = UIRectEdgeLeft;
+    [_tableView addGestureRecognizer:screenPanLeft];
+    
+    // 屏幕右部偏移
+    UIScreenEdgePanGestureRecognizer *screenPanRight = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(rightEdgeGestureAction:)];
+    screenPanRight.edges = UIRectEdgeRight;
+    [_tableView addGestureRecognizer:screenPanRight];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -124,11 +134,16 @@ static NSString *btnIdentifier = @"btn";
         NSDictionary *resultDict = (NSDictionary *)responseObject;
         NSArray *arr = resultDict[@"results"];
         
-        
         [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+
+            
             InfoModel *model = [InfoModel modelWithDictionary:(NSDictionary *)obj];
-            [_mArr addObject:model];
+            if (![model.type isEqualToString:@"ad"] && ![model.title isEqualToString:@"4columns"]) {
+               [_mArr addObject:model];
+            }
+            
         }];
+        
 
         if ([_tableView.mj_footer isRefreshing]) {
             [_tableView.mj_footer endRefreshing];
@@ -142,15 +157,23 @@ static NSString *btnIdentifier = @"btn";
 - (void)loadData {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
-    [manager GET:@"http://api.wallstreetcn.com/v2/mobile-articles?limit=5&page=1&channel=global-carousel&device=android&version=3&_eva_t=1460986634" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@", responseObject);
+    NSDate *date = [NSDate date];
+    NSTimeInterval time = [date timeIntervalSince1970];
+    NSInteger currentTime = (NSInteger)time;
+    NSDictionary *parameter = @{@"_eva_t":@(currentTime)};
+    
+    [manager GET:@"http://api.wallstreetcn.com/v2/mobile-articles?limit=5&page=1&channel=global-carousel&device=android&version=3" parameters:parameter progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
         NSDictionary *resultDict = (NSDictionary *)responseObject;
         NSArray *resultArr = resultDict[@"results"];
         
         _infoArr = [NSMutableArray array];
         [resultArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             InfoModel *model = [InfoModel modelWithDictionary:(NSDictionary *)obj];
-            [_infoArr addObject:model];
+            if (![model.type isEqualToString:@"ad"]) {
+               [_infoArr addObject:model];
+            }
+            
         }];
         
         
@@ -182,17 +205,17 @@ static NSString *btnIdentifier = @"btn";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     InfoModel *model = _mArr[indexPath.row];
-    NSLog(@"%@", model.type);
-    if ([model.title isEqualToString:@"4columns"]) {
-        BtnViewCell *cell = [tableView dequeueReusableCellWithIdentifier:btnIdentifier];
-        
-        cell.btnModel = _mArr[indexPath.row];
-        cell.gotoView = ^(NSString *url) {
-            MoreInfoVC *infoVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MoreInfoVC"];
-            infoVC.channel = url;
-        };
-        return cell;
-    } else if ([model.type isEqualToString:@"topic"]) {
+//        if ([model.title isEqualToString:@"4columns"]) {
+//        BtnViewCell *cell = [tableView dequeueReusableCellWithIdentifier:btnIdentifier];
+//        
+//        cell.btnModel = _mArr[indexPath.row];
+//        cell.gotoView = ^(NSString *url) {
+//            MoreInfoVC *infoVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MoreInfoVC"];
+//            infoVC.channel = url;
+//        };
+//        return cell;
+//    } else
+        if ([model.type isEqualToString:@"topic"]) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:moreIdentifier];
         
         for (UIView *view in cell.contentView.subviews) {
@@ -314,6 +337,7 @@ static NSString *btnIdentifier = @"btn";
     DetailVC *web = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailVC"];
     web.Id = model.Id;
     [self.navigationController pushViewController:web animated:NO];
+    
 }
 
 
@@ -322,24 +346,38 @@ static NSString *btnIdentifier = @"btn";
     [UIView animateWithDuration:1.0 animations:^{
         _list.view.transform = CGAffineTransformMakeTranslation(300, 0);
         _tableView.transform = CGAffineTransformMakeTranslation(300, 0);
-        self.navigationController.navigationBar.transform = CGAffineTransformMakeTranslation(300, 0);
         
+        _gestureTag = YES;
         _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backView)];
-        [_tableView addGestureRecognizer:_tap];
+        
+    } completion:^(BOOL finished) {
+        if (![_tableView.gestureRecognizers containsObject:_tap]) {
+            [_tableView addGestureRecognizer:_tap];
+        }
     }];
     
 }
 
 - (void)backView {
     [UIView animateWithDuration:.5 animations:^{
+
         _list.view.transform = CGAffineTransformIdentity;
         _tableView.transform = CGAffineTransformIdentity;
-        self.navigationController.navigationBar.transform = CGAffineTransformIdentity;
-        [_tableView removeGestureRecognizer:_tap];
-    }];
+        
+       
+    }
+     completion:^(BOOL finished) {
+         if (_tap) {
+            [_tableView removeGestureRecognizer:_tap];
+             _tap = nil;
+         }
+         
+     }];
 }
 
 - (void)jump:(UITapGestureRecognizer *)tap {
+    
+    
     UITableViewCell *cell = (UITableViewCell *)tap.view;
     NSIndexPath *indexpath = [_tableView indexPathForCell:cell];
     InfoModel *model = _mArr[indexpath.row];
@@ -350,8 +388,52 @@ static NSString *btnIdentifier = @"btn";
 }
 
 
-- (void)edgeGestureAction:(UIScreenEdgePanGestureRecognizer *)screenPan {
-    NSLog(@"%@", screenPan);
+- (void)leftEdgeGestureAction:(UIScreenEdgePanGestureRecognizer *)screenPan {
+
+    CGPoint point = [screenPan translationInView:self.view];
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    
+    _tableView.transform = CGAffineTransformMakeTranslation(point.x, 0);
+    _list.view.transform = CGAffineTransformMakeTranslation(point.x, 0);
+    
+    
+    if (screenPan.state == UIGestureRecognizerStateEnded) {
+        if (point.x < width / 2) {
+            [self backView];
+        } else {
+            [self actionOnLeftBarBtnTaped];
+            _gestureTag = YES;
+        }
+    }
+    
+    
 }
+
+- (void)rightEdgeGestureAction:(UIScreenEdgePanGestureRecognizer *)screenPan {
+    if (!_gestureTag) {
+        return;
+    }
+    
+    CGPoint point = [screenPan translationInView:self.view];
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+
+    _tableView.transform = CGAffineTransformMakeTranslation(300 + point.x, 0);
+    _list.view.transform = CGAffineTransformMakeTranslation(300 + point.x, 0);
+    
+    
+    if (screenPan.state == UIGestureRecognizerStateEnded) {
+        if (abs((int)point.x) > width / 2) {
+            
+            [self actionOnLeftBarBtnTaped];
+            _gestureTag = NO;
+        } else {
+            
+            [self backView];
+        }
+    }
+}
+
 
 @end
