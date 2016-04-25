@@ -14,6 +14,11 @@
 #import "AFHTTPSessionManager.h"
 #import "MJRefresh.h"
 
+#import "Common.h"
+
+#import "Reachability.h"
+#import "SVProgressHUD.h"
+
 @interface AguVC () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -21,6 +26,8 @@
 @property (nonatomic, assign) NSInteger pageIndex;
 
 @property (nonatomic, strong) NSMutableArray *aguArr;
+
+@property (nonatomic, assign) BOOL isRefreshing;
 
 @end
 
@@ -31,7 +38,7 @@ static NSString *aguIdentifier = @"agu";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH - 120) style:UITableViewStylePlain];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.estimatedRowHeight = 100.f;
@@ -40,18 +47,33 @@ static NSString *aguIdentifier = @"agu";
     
     [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([AguCell class]) bundle:nil] forCellReuseIdentifier:aguIdentifier];
     
-    _aguArr = [NSMutableArray array];
+    
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         _pageIndex = 0;
+        _aguArr = [NSMutableArray array];
+        [_tableView reloadData];
         [self loadData];
     }];
     
-    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        _pageIndex++;
-        [self loadData];
-    }];
-    
-    [_tableView.mj_header beginRefreshing];
+    if ([self netCanReach]) {
+        [_tableView.mj_header beginRefreshing];
+    }
+   
+}
+
+- (BOOL)netCanReach {
+    Reachability *reach = [Reachability reachabilityForInternetConnection];
+    if (!([reach currentReachabilityStatus] == ReachableViaWWAN) && !([reach currentReachabilityStatus] == ReachableViaWiFi)) {
+        [SVProgressHUD showErrorWithStatus:@"网络不通"];
+        return NO;
+    } else {
+        _tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            _pageIndex++;
+            [self loadData];
+        }];
+        return YES;
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,6 +84,16 @@ static NSString *aguIdentifier = @"agu";
 
 
 - (void)loadData {
+    if (![self netCanReach]) {
+        if ([_tableView.mj_header isRefreshing]) {
+            [_tableView.mj_header endRefreshing];
+        }
+        return;
+    }
+    
+    if (_isRefreshing) {
+        return;
+    }
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -71,7 +103,10 @@ static NSString *aguIdentifier = @"agu";
     NSDictionary *parameter = @{@"page":@(_pageIndex),
                                 @"_eva_t":@(time)};
     
-    [manager GET:@"http://api.wallstreetcn.com/v2/livenews?channelId=2" parameters:parameter progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    
+    [manager GET:@"http://api.wallstreetcn.com/v2/livenews?channelId=2" parameters:parameter progress:^(NSProgress * _Nonnull downloadProgress) {
+        _isRefreshing = YES;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
         NSArray *resultArr = resultDict[@"results"];
@@ -81,8 +116,6 @@ static NSString *aguIdentifier = @"agu";
             [_aguArr addObject:model];
         }];
         
-        [_tableView reloadData];
-        
         if ([_tableView.mj_header isRefreshing]) {
             [_tableView.mj_header endRefreshing];
         }
@@ -90,8 +123,17 @@ static NSString *aguIdentifier = @"agu";
             [_tableView.mj_footer endRefreshing];
         }
         
+        _isRefreshing = NO;
+        [_tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
+        
+        if ([_tableView.mj_header isRefreshing]) {
+            [_tableView.mj_header endRefreshing];
+        }
+        if ([_tableView.mj_footer isRefreshing]) {
+            [_tableView.mj_footer endRefreshing];
+        }
+        _isRefreshing = NO;
     }];
 }
 

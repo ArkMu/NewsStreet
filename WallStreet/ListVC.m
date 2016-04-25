@@ -31,7 +31,7 @@ static NSString *headerIdentifier = @"header";
     
 
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(75, 0, 300, self.view.frame.size.height) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 300, 0, 300, self.view.frame.size.height) style:UITableViewStylePlain];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [self.view addSubview:_tableView];

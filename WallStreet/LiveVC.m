@@ -36,16 +36,6 @@
     self.navigationItem.titleView = _segment;
     [_segment addTarget:self action:@selector(segmentControlValuedChanged:) forControlEvents:UIControlEventValueChanged];
     
-//    NSDate *date = [NSDate date];
-//    NSString *str = [NSString stringWithFormat:@"%@", date];
-//    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    rightBtn.frame = CGRectMake(0, 0, 60, 40);
-//    [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    rightBtn.titleLabel.font = [UIFont systemFontOfSize:13.f];
-//    [rightBtn addTarget:self action:@selector(actionOnBtnTaped) forControlEvents:UIControlEventTouchUpInside];
-//    [rightBtn setTitle:[str substringWithRange:NSMakeRange(0, 7)] forState:UIControlStateNormal];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    
     _pageViewControl = [self.storyboard instantiateViewControllerWithIdentifier:@"pageVC"];
     _pageViewControl.dataSource = self;
     _pageViewControl.delegate = self;
@@ -70,10 +60,11 @@
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
+    
     NSInteger index = [[viewController valueForKey:@"index"] integerValue];
     _index = index;
     
-    _segment.selectedSegmentIndex = _index;
+   // _segment.selectedSegmentIndex = _index;
     
     _index--;
     if (_index < 0) {
@@ -91,7 +82,7 @@
     NSInteger index = [[viewController valueForKey:@"index"] integerValue];
     _index = index;
     
-    _segment.selectedSegmentIndex = _index;
+   // _segment.selectedSegmentIndex = _index;
     
     _index++;
     if (_index == _VCArr.count) {
@@ -104,6 +95,13 @@
     
     return _VCArr[_index];
 }
+
+-(void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed{
+    NSInteger index=[[pageViewController.viewControllers.firstObject valueForKey:@"index"] integerValue];
+    self.segment.selectedSegmentIndex=index;
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

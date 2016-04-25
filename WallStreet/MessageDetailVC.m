@@ -12,6 +12,7 @@
 
 #import "Common.h"
 
+#import "ContainerVC.h"
 @interface MessageDetailVC ()
 
 @end
@@ -57,6 +58,12 @@
 
 - (void)btnOnDismiss {
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    
+//    UINavigationController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"contVC"];
+//
+//    [self presentViewController:vc animated:YES completion:nil];
+    
 }
 
 /*

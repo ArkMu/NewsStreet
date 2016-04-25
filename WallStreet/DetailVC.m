@@ -104,7 +104,7 @@ static NSString *webIdentifier = @"web";
     }];
     
     [webView loadHTMLString:_detailModel.content baseURL:nil];
-    NSLog(@"%f", webView.scrollView.contentSize.height);
+//    NSLog(@"%f", webView.scrollView.contentSize.height);
     return cell;
 }
 

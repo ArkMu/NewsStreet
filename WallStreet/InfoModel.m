@@ -26,7 +26,7 @@
         self.url = dict[@"url"];
         self.imgUrl = dict[@"img"][@"url"];
         self.tags = dict[@"tags"];
-        self.userModel = [UserModel modelWithDictionary:dict[@"user"]];
+//        self.userModel = [UserModel modelWithDictionary:dict[@"user"]];
         self.commentCount = [dict[@"commentCount"] integerValue];
         
         _relationArr = [NSMutableArray array];

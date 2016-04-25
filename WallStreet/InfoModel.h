@@ -10,7 +10,7 @@
 
 @class UserModel;
 
-@interface InfoModel : NSObject <NSCoding>
+@interface InfoModel : NSObject //<NSCoding>
 
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, assign) NSInteger Id;
@@ -25,7 +25,7 @@
 @property (nonatomic, strong) NSString *imgUrl;
 @property (nonatomic, strong) NSArray *tags;
 
-@property (nonatomic, strong) UserModel *userModel;
+//@property (nonatomic, strong) UserModel *userModel;
 
 @property (nonatomic, strong) NSMutableArray *relationArr;
 

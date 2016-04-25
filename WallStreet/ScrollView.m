@@ -26,6 +26,8 @@
 
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
+@property (nonatomic, assign) BOOL fist;
+
 @end
 
 @implementation ScrollView
@@ -52,13 +54,14 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (scrollView.contentOffset.x == 0) {
         _currentIndex--;
-    } else if (scrollView.contentOffset.x == 2 * self.scrollView.frame.size.width) {
+    } else if (scrollView.contentOffset.x == 2 * [UIScreen mainScreen].bounds.size.width) {
         _currentIndex++;
     }
     
     _currentIndex = [self indexEnable:_currentIndex];
     
     [self setImgForView];
+    
 }
 
 - (void)setImgForView {
@@ -83,7 +86,15 @@
     _titleLabel.text = rightModel.title;
     _rightImgView.userInteractionEnabled = YES;
     
-    _scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.scrollView.frame), 0);
+    if (!_fist) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            _scrollView.contentOffset = CGPointMake(CGRectGetWidth([UIScreen mainScreen].bounds), 0);
+            _fist = YES;
+            return;
+        });
+    }
+    
+    _scrollView.contentOffset = CGPointMake(CGRectGetWidth([UIScreen mainScreen].bounds), 0);
     
 }
 
@@ -109,13 +120,5 @@
 }
 
 
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

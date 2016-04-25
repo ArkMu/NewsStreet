@@ -118,7 +118,7 @@ static NSString *cellIdentifier = @"cell";
         
         [self loadTableView];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
+
     }];
 }
 
@@ -152,6 +152,8 @@ static NSString *cellIdentifier = @"cell";
     // Today
     if([_calendarManager.dateHelper date:[NSDate date] isTheSameDayThan:dayView.date]){
         dayView.circleView.hidden = NO;
+        
+        [self loadData];
         dayView.circleView.backgroundColor = [UIColor blueColor];
         dayView.dotView.backgroundColor = [UIColor whiteColor];
         dayView.textLabel.textColor = [UIColor whiteColor];

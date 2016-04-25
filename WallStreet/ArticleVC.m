@@ -27,11 +27,19 @@
 
 #import "ListVC.h"
 
-//#import "MoreInfoVC.h"
-
 #import "TopicVC.h"
 
+#import "Reachability.h"
+
+#import "SVProgressHUD.h"
+
+#import "Common.h"
+
+#import "AppDelegate.h"
+
 @interface ArticleVC () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) Reachability *hostReachability;
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -47,6 +55,11 @@
 
 @property (nonatomic, assign) BOOL gestureTag;
 
+@property (nonatomic, assign) BOOL leftBtnTaped;
+
+@property (nonatomic, assign) BOOL isRefresh;
+
+@property (nonatomic, assign) BOOL isloadMore;
 @end
 
 @implementation ArticleVC
@@ -58,7 +71,9 @@ static NSString *btnIdentifier = @"btn";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+    self.navigationItem.title = @"首页";
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, ScreenH - 64) style:UITableViewStylePlain];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     
@@ -71,10 +86,11 @@ static NSString *btnIdentifier = @"btn";
     [self addChildViewController:nav];
     
     _list = nav.viewControllers.firstObject;
+    _list.view.backgroundColor = [UIColor redColor];
     [self.view addSubview:_list.view];
     
     [self.view.window bringSubviewToFront:_list.view];
-    _list.view.frame = CGRectMake(-375, 0, self.view.frame.size.width, self.view.frame.size.height);
+    _list.view.frame = CGRectMake(-[UIScreen mainScreen].bounds.size.width, 0, self.view.frame.size.width, self.view.frame.size.height);
     __weak ArticleVC *article = self;
     _list.dismissListVC = ^(MoreInfoVC *info){
         [article backView];
@@ -85,20 +101,23 @@ static NSString *btnIdentifier = @"btn";
     [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([InfoCellOne class]) bundle:nil] forCellReuseIdentifier:cellIdentifier];
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:moreIdentifier];
     [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([BtnViewCell class]) bundle:nil] forCellReuseIdentifier:btnIdentifier];
-    
-    _mArr = [NSMutableArray array];
-    
+
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        if (![self netCanReach]) {
+            if ([_tableView.mj_header isRefreshing]) {
+                [_tableView.mj_header endRefreshing];
+            }
+            return;
+        }
         _pageIndex = 1;
+        _mArr = [NSMutableArray array];
+        [_tableView reloadData];
         [self loadData];
     }];
     
-    _tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        _pageIndex++;
-        [self loadMoreData];
-    }];
-    
-    [_tableView.mj_header beginRefreshing];
+    if ([self netCanReach]) {
+        [_tableView.mj_header beginRefreshing];
+    }
     
     //偏移手势
     // 屏幕左部偏移
@@ -112,6 +131,21 @@ static NSString *btnIdentifier = @"btn";
     [_tableView addGestureRecognizer:screenPanRight];
 }
 
+- (BOOL)netCanReach {
+    Reachability *reach = [Reachability reachabilityForInternetConnection];
+    if (!([reach currentReachabilityStatus] == ReachableViaWWAN) && !([reach currentReachabilityStatus] == ReachableViaWiFi)) {
+        [SVProgressHUD showErrorWithStatus:@"网络不通"];
+        return NO;
+    } else {
+        _tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            _pageIndex++;
+            [self loadMoreData];
+        }];
+        return YES;
+        
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
@@ -119,6 +153,16 @@ static NSString *btnIdentifier = @"btn";
 }
 
 - (void)loadMoreData {
+    if (![self netCanReach]) {
+        if ([_tableView.mj_footer isRefreshing]) {
+            [_tableView.mj_footer endRefreshing];
+        }
+        return;
+    }
+    if (_isloadMore) {
+        return;
+    }
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     NSDate *currentDate = [NSDate date];
@@ -129,7 +173,13 @@ static NSString *btnIdentifier = @"btn";
                                 @"_eva_t":@(inter)};
 
     
-    [manager GET:@"http://api.wallstreetcn.com/v2/mobile-articles?channel=global&device=android&accept=article,external-article,topic,facility,flash-strip,external-topic,ad.inhouse,ad.airwaveone,ad.madhouse,chat" parameters:parameter progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:@"http://api.wallstreetcn.com/v2/mobile-articles?channel=global&device=android&accept=article,external-article,topic,facility,flash-strip,external-topic,ad.inhouse,ad.airwaveone,ad.madhouse,chat" parameters:parameter progress:^(NSProgress *_Nonnull downloadProgress) {
+        _isloadMore = YES;
+            if ([_tableView.mj_header isRefreshing]) {
+                [_tableView.mj_header endRefreshing];
+                _isloadMore = NO;
+            }
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
     
         NSDictionary *resultDict = (NSDictionary *)responseObject;
         NSArray *arr = resultDict[@"results"];
@@ -143,18 +193,32 @@ static NSString *btnIdentifier = @"btn";
             }
             
         }];
-        
 
         if ([_tableView.mj_footer isRefreshing]) {
             [_tableView.mj_footer endRefreshing];
         }
+        
+        _isloadMore = NO;
         [_tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
+        if ([_tableView.mj_footer isRefreshing]) {
+            [_tableView.mj_footer endRefreshing];
+        }
+        _isloadMore = NO;
     }];
 }
 
 - (void)loadData {
+    if (![self netCanReach]) {
+        if ([_tableView.mj_header isRefreshing]) {
+            [_tableView.mj_header endRefreshing];
+        }
+    }
+    
+    if (_isRefresh) {
+        return;
+    }
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     NSDate *date = [NSDate date];
@@ -162,7 +226,9 @@ static NSString *btnIdentifier = @"btn";
     NSInteger currentTime = (NSInteger)time;
     NSDictionary *parameter = @{@"_eva_t":@(currentTime)};
     
-    [manager GET:@"http://api.wallstreetcn.com/v2/mobile-articles?limit=5&page=1&channel=global-carousel&device=android&version=3" parameters:parameter progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:@"http://api.wallstreetcn.com/v2/mobile-articles?limit=5&page=1&channel=global-carousel&device=android&version=3" parameters:parameter progress:^(NSProgress *_Nonnull downloadProgress) {
+        _isRefresh = YES;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *resultDict = (NSDictionary *)responseObject;
         NSArray *resultArr = resultDict[@"results"];
@@ -175,7 +241,6 @@ static NSString *btnIdentifier = @"btn";
             }
             
         }];
-        
         
         ScrollView *scroll = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([ScrollView class]) owner:nil options:nil][0];
         scroll.infoArr = _infoArr;
@@ -191,9 +256,14 @@ static NSString *btnIdentifier = @"btn";
         if ([_tableView.mj_header isRefreshing]) {
            [_tableView.mj_header endRefreshing]; 
         }
-        
+        _isRefresh = NO;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
+        
+        if ([_tableView.mj_header isRefreshing]) {
+            [_tableView.mj_header endRefreshing];
+        }
+        
+        _isRefresh = NO;
     }];
 }
 
@@ -205,16 +275,7 @@ static NSString *btnIdentifier = @"btn";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     InfoModel *model = _mArr[indexPath.row];
-//        if ([model.title isEqualToString:@"4columns"]) {
-//        BtnViewCell *cell = [tableView dequeueReusableCellWithIdentifier:btnIdentifier];
-//        
-//        cell.btnModel = _mArr[indexPath.row];
-//        cell.gotoView = ^(NSString *url) {
-//            MoreInfoVC *infoVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MoreInfoVC"];
-//            infoVC.channel = url;
-//        };
-//        return cell;
-//    } else
+
         if ([model.type isEqualToString:@"topic"]) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:moreIdentifier];
         
@@ -242,14 +303,13 @@ static NSString *btnIdentifier = @"btn";
         }];
         
         UIView *view = [self setImgViewForScrollView:model.relationArr];
-        UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, 100)];
+        UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 100)];
         scroll.contentSize = view.frame.size;
         [scroll addSubview:view];
         
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
-            make.leading.mas_equalTo(0);
             make.center.mas_equalTo(scroll);
+            make.size.mas_equalTo(scroll);
         }];
         
         [cell.contentView addSubview:scroll];
@@ -343,6 +403,10 @@ static NSString *btnIdentifier = @"btn";
 
 
 - (void)actionOnLeftBarBtnTaped {
+    if (_leftBtnTaped) {
+        [self backView];
+        return;
+    }
     [UIView animateWithDuration:1.0 animations:^{
         _list.view.transform = CGAffineTransformMakeTranslation(300, 0);
         _tableView.transform = CGAffineTransformMakeTranslation(300, 0);
@@ -354,6 +418,7 @@ static NSString *btnIdentifier = @"btn";
         if (![_tableView.gestureRecognizers containsObject:_tap]) {
             [_tableView addGestureRecognizer:_tap];
         }
+        _leftBtnTaped = !_leftBtnTaped;
     }];
     
 }
@@ -371,7 +436,8 @@ static NSString *btnIdentifier = @"btn";
             [_tableView removeGestureRecognizer:_tap];
              _tap = nil;
          }
-         
+         _leftBtnTaped = !_leftBtnTaped;
+         _gestureTag = !_gestureTag;
      }];
 }
 
@@ -424,7 +490,7 @@ static NSString *btnIdentifier = @"btn";
     
     
     if (screenPan.state == UIGestureRecognizerStateEnded) {
-        if (abs((int)point.x) > width / 2) {
+        if (abs((int)point.x) < width / 2) {
             
             [self actionOnLeftBarBtnTaped];
             _gestureTag = NO;
