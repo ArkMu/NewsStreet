@@ -8,6 +8,8 @@
 
 #import "ArticleVC.h"
 
+#import <SpriteKit/SpriteKit.h>
+
 #import "MJRefresh.h"
 #import "AFHTTPSessionManager.h"
 #import "UIButton+WebCache.h"
@@ -36,6 +38,7 @@
 #import "Common.h"
 
 #import "AppDelegate.h"
+
 
 @interface ArticleVC () <UITableViewDataSource, UITableViewDelegate>
 
